@@ -131,7 +131,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
         <div className='flex items-center justify-center m-0 p-0'>
           <Header />
           <div className='max-w-md w-full bg-white rounded-lg shadow-lg'>
-            <div className='mt-24 px-6 m-0 p-0'>
+            <div className='mt-20 px-6 m-0 p-0'>
               <h1 className='text-2xl font-semibold text-center text-gray-500 mt-4 mb-6'>
                 Servicio de viaje
               </h1>

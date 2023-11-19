@@ -97,8 +97,10 @@ const ViajarAhoraPage = () => {
           </div>
         </div>
       ) : (
-        <div className='h-screen overflow-y-hidden flex flex-row justify-evenly flex-wrap'>
-          <div style={{ minWidth: '500px' }}>
+        <div className='flex flex-row justify-evenly flex-wrap h-screen overflow-y-auto'>
+          <div
+            style={{ minWidth: '500px', height: '100vh', overflowY: 'auto' }}
+          >
             <CrearSolicitud
               setSolicitudesServicio={setSolicitudesServicio}
               activeTab={activeTab}
