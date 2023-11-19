@@ -3,15 +3,15 @@ import { ApiService } from '@/services/api.service';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import Swal from 'sweetalert2';
 
-interface SolicitudesInmediatasListProps {
-  solicitudesInmediatas: ListaSolicitudesServicioResponse;
-  setSolicitudesInmediatas: Dispatch<
+interface SolicitudesReservadasListProps {
+  solicitudesReservadas: ListaSolicitudesServicioResponse;
+  setSolicitudesReservadas: Dispatch<
     SetStateAction<ListaSolicitudesServicioResponse>
   >;
 }
 
-const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
-  const { solicitudesInmediatas, setSolicitudesInmediatas } = props;
+const SolicitudesReservadasList = (props: SolicitudesReservadasListProps) => {
+  const { solicitudesReservadas, setSolicitudesReservadas } = props;
 
   const [apiService] = useState<ApiService>(new ApiService());
 
@@ -34,12 +34,12 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
           text: 'La solicitud se eliminó correctamente',
         });
 
-        const { elements } = solicitudesInmediatas;
+        const { elements } = solicitudesReservadas;
         const solicitudesFiltradas = elements.filter(
           (solicitud) => solicitud.id !== id
         );
 
-        setSolicitudesInmediatas((solicitudes) => ({
+        setSolicitudesReservadas((solicitudes) => ({
           ...solicitudes,
           elements: solicitudesFiltradas,
         }));
@@ -60,12 +60,12 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
         <div className='w-full bg-white rounded-lg shadow-lg'>
           <div className='px-6 m-0 p-0'>
             <h1 className='text-2xl font-semibold text-center text-gray-500 mt-4 mb-6'>
-              Lista de Solicitudes Inmediatas
+              Lista de Solicitudes Reservadas
             </h1>
             <div className='container'>
               <div className='row'>
-                {solicitudesInmediatas.elements
-                  .filter(({ inmediato }) => inmediato)
+                {solicitudesReservadas.elements
+                  .filter(({ inmediato }) => !inmediato)
                   .map((solicitud) => (
                     <div key={solicitud.id} className='col-lg-12 col-sm-12'>
                       <ul className='mb-5'>
@@ -99,11 +99,19 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
                         </li>
                         <li>
                           <strong>Maletas: </strong>{' '}
-                          <span>{solicitud.condicionesServicio?.maletas}</span>
+                          <span>
+                            {solicitud.condicionesServicio.maletas
+                              ? 'SI'
+                              : 'NO'}
+                          </span>
                         </li>
                         <li>
                           <strong>Mascotas: </strong>{' '}
-                          <span>{solicitud.condicionesServicio?.mascotas}</span>
+                          <span>
+                            {solicitud.condicionesServicio.mascotas
+                              ? 'SI'
+                              : 'NO'}
+                          </span>
                         </li>
                         <ul>
                           {solicitud.paradas?.map((parada, index) => (
@@ -124,7 +132,7 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
                     </div>
                   ))}
               </div>
-              {solicitudesInmediatas.paginationInfo.totalElements === 0 && (
+              {solicitudesReservadas.paginationInfo.totalElements === 0 && (
                 <div className='flex justify-center w-full bg-red-500'>
                   <p className='text-2xl font-semibold text-center text-gray-500 mt-4 mb-6'>
                     No hay solicitudes
@@ -139,4 +147,4 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
   );
 };
 
-export default SolicitudesInmediatasList;
+export default SolicitudesReservadasList;

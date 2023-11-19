@@ -1,8 +1,8 @@
 import CrearSolicitud, {
   SolicitudServicioInfo,
-} from '@/components/SolicitudesServicios/CrearSolicitud';
-import SolicitudesList from '@/components/SolicitudesServicios/SolicitudesList';
-import SolicitudesPaginacion from '@/components/SolicitudesServicios/SolicitudesPaginacion';
+} from '@/components/solicitudesServicios/CrearSolicitud';
+import SolicitudesList from '@/components/solicitudesServicios/SolicitudesList';
+import SolicitudesPaginacion from '@/components/solicitudesServicios/SolicitudesPaginacion';
 import { ApiService } from '@/services/api.service';
 import { Fragment, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
