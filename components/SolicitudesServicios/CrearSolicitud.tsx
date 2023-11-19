@@ -119,7 +119,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
     setParadas((prevParadas) => [...prevParadas, '']);
   };
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(activeTab === 0);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
