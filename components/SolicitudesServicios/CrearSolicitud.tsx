@@ -17,6 +17,7 @@ export interface SolicitudServicioInfo {
   id?: number;
   activa?: boolean;
   usuarioId: string;
+  inmediato: boolean;
   origen: string;
   destino: string;
   cantidadPasajeros: number;
@@ -87,6 +88,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
       destino: data.destiny,
       cantidadPasajeros: +data.passengersNumber,
       tipo: data.vehicleCategory,
+      inmediato: isChecked,
       condicionesServicio: {
         maletas: data.suitcase,
         mascotas: data.pet,

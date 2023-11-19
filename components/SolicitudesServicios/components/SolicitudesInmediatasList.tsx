@@ -102,7 +102,7 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
                         <span>{solicitud.condicionesServicio?.mascotas}</span>
                       </li>
                       <ul>
-                        {solicitud.paradas.map((parada, index) => (
+                        {solicitud.paradas?.map((parada, index) => (
                           <li key={parada}>
                             <span>Parada #{index + 1}: </span>
                             <strong>{parada}</strong>
