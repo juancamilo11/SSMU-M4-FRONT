@@ -12,13 +12,20 @@ export class ApiService {
       .then((data) => data as T);
   }
 
-  public get<T>(url: string): Promise<T> {
-    const config = {
+  public get<T>(url: string, query?: { [key: string]: any }): Promise<T> {
+    const config: RequestInit = {
       method: 'GET',
     };
-    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
-      ...config,
-    })
+    const params = new URLSearchParams(query).toString();
+    console.log({
+      params,
+    });
+    return fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}?${params}`,
+      {
+        ...config,
+      }
+    )
       .then((response) => response.json())
       .then((data) => data as T);
   }
