@@ -64,61 +64,65 @@ const SolicitudesReservadasList = (props: SolicitudesReservadasListProps) => {
             </h1>
             <div className='container'>
               <div className='row'>
-                {solicitudesReservadas.elements.map((solicitud) => (
-                  <div key={solicitud.id} className='col-lg-12 col-sm-12'>
-                    <ul className='mb-5'>
-                      <li>
-                        <strong>id: </strong> <span>{solicitud.id}</span>
-                      </li>
-                      <li>
-                        <strong>Estado: </strong>{' '}
-                        <span>{solicitud.activa ? 'ACTIVA' : 'INACTIVA'}</span>
-                      </li>
-                      <li>
-                        <strong>usuarioId: </strong>{' '}
-                        <span>{solicitud.usuarioId}</span>
-                      </li>
-                      <li>
-                        <strong>origen: </strong>{' '}
-                        <span>{solicitud.origen}</span>
-                      </li>
-                      <li>
-                        <strong>destino: </strong>{' '}
-                        <span>{solicitud.destino}</span>
-                      </li>
-                      <li>
-                        <strong>cantidadPasajeros: </strong>{' '}
-                        <span>{solicitud.cantidadPasajeros}</span>{' '}
-                      </li>
-                      <li>
-                        <strong>tipo: </strong> <span>{solicitud.tipo}</span>
-                      </li>
-                      <li>
-                        <strong>Maletas: </strong>{' '}
-                        <span>{solicitud.condicionesServicio?.maletas}</span>
-                      </li>
-                      <li>
-                        <strong>Mascotas: </strong>{' '}
-                        <span>{solicitud.condicionesServicio?.mascotas}</span>
-                      </li>
-                      <ul>
-                        {solicitud.paradas?.map((parada, index) => (
-                          <li key={parada}>
-                            <span>Parada #{index + 1}: </span>
-                            <strong>{parada}</strong>
-                          </li>
-                        ))}
+                {solicitudesReservadas.elements
+                  .filter(({ inmediato }) => !inmediato)
+                  .map((solicitud) => (
+                    <div key={solicitud.id} className='col-lg-12 col-sm-12'>
+                      <ul className='mb-5'>
+                        <li>
+                          <strong>id: </strong> <span>{solicitud.id}</span>
+                        </li>
+                        <li>
+                          <strong>Estado: </strong>{' '}
+                          <span>
+                            {solicitud.activa ? 'ACTIVA' : 'INACTIVA'}
+                          </span>
+                        </li>
+                        <li>
+                          <strong>usuarioId: </strong>{' '}
+                          <span>{solicitud.usuarioId}</span>
+                        </li>
+                        <li>
+                          <strong>origen: </strong>{' '}
+                          <span>{solicitud.origen}</span>
+                        </li>
+                        <li>
+                          <strong>destino: </strong>{' '}
+                          <span>{solicitud.destino}</span>
+                        </li>
+                        <li>
+                          <strong>cantidadPasajeros: </strong>{' '}
+                          <span>{solicitud.cantidadPasajeros}</span>{' '}
+                        </li>
+                        <li>
+                          <strong>tipo: </strong> <span>{solicitud.tipo}</span>
+                        </li>
+                        <li>
+                          <strong>Maletas: </strong>{' '}
+                          <span>{solicitud.condicionesServicio?.maletas}</span>
+                        </li>
+                        <li>
+                          <strong>Mascotas: </strong>{' '}
+                          <span>{solicitud.condicionesServicio?.mascotas}</span>
+                        </li>
+                        <ul>
+                          {solicitud.paradas?.map((parada, index) => (
+                            <li key={parada}>
+                              <span>Parada #{index + 1}: </span>
+                              <strong>{parada}</strong>
+                            </li>
+                          ))}
+                        </ul>
+                        <button
+                          onClick={() => eliminarSolicitud(solicitud.id!)}
+                          type='button'
+                          className='px-4 rounded-2xl border-b-4 border-b-red-600 bg-red-500 py-2 font-bold text-white hover:bg-red-400 active:translate-y-[0.125rem] active:border-b-red-400'
+                        >
+                          Eliminar
+                        </button>
                       </ul>
-                      <button
-                        onClick={() => eliminarSolicitud(solicitud.id!)}
-                        type='button'
-                        className='px-4 rounded-2xl border-b-4 border-b-red-600 bg-red-500 py-2 font-bold text-white hover:bg-red-400 active:translate-y-[0.125rem] active:border-b-red-400'
-                      >
-                        Eliminar
-                      </button>
-                    </ul>
-                  </div>
-                ))}
+                    </div>
+                  ))}
               </div>
               {solicitudesReservadas.paginationInfo.totalElements === 0 && (
                 <div className='flex justify-center w-full bg-red-500'>
