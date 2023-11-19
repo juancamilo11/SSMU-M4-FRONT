@@ -1,50 +1,54 @@
-export class ApiService{
+export class ApiService {
+  public post<T>(data: T, url: string): Promise<T> {
+    const config = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    };
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
+      ...config,
+    })
+      .then((response) => response.json())
+      .then((data) => data as T);
+  }
 
-    async post(data:any, url:string){
-        let rta;
+  public get<T>(url: string): Promise<T> {
+    const config = {
+      method: 'GET',
+    };
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
+      ...config,
+    })
+      .then((response) => response.json())
+      .then((data) => data as T);
+  }
 
-        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL+url}`, 
-            {method: 'POST', headers: {"Content-Type": "application/json"}, 
-            body: JSON.stringify(data)})
-                .then(response => response.json())
-                .then(data => rta = data)
-                .catch(error => {
-                    console.log(error);
-                    rta = {message: "Algo salió mal..."};
-                });
+  public delete<T>(url: string): Promise<T> {
+    const config = {
+      method: 'DELETE',
+    };
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
+      ...config,
+    })
+      .then((response) => response.json())
+      .then((data) => data as T);
+  }
 
-        return rta;
-    }
+  async patch(data: any, url: string) {
+    let rta;
 
-    async patch(data:any, url:string){
-        let rta;
-        
-        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL+url}`, 
-            {method: 'PATCH', headers: {"Content-Type": "application/json"}, 
-            body: JSON.stringify(data)})
-                .then(response => response.json())
-                .then(data => rta = data)
-                .catch(error => {
-                    console.log(error);
-                    rta = {message: "Algo salió mal..."};
-                });
+    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => (rta = data))
+      .catch((error) => {
+        console.log(error);
+        rta = { message: 'Algo salió mal...' };
+      });
 
-        return rta;
-    }
-
-    async get(url:string){
-        let rta;
-        
-        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL+url}`, 
-            {method: 'GET'})
-                .then(response => response.json())
-                .then(data => rta = data)
-                .catch(error => {
-                    console.log(error);
-                    rta = {message: "Algo salió mal..."};
-                });
-
-        return rta;
-    }
-
+    return rta;
+  }
 }
