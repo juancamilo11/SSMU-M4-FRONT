@@ -4,6 +4,7 @@ import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Swal from 'sweetalert2';
 import SolicitudesInmediatasList from './components/SolicitudesInmediatasList';
 import SolicitudesReservadasList from './components/SolicitudesReservadasList';
+import Link from 'next/link';
 
 interface SolicitudesServicioListProps {
   solicitudesServicio: ListaSolicitudesServicioResponse;
@@ -45,7 +46,7 @@ const SolicitudesList = (props: SolicitudesServicioListProps) => {
             role='tablist'
           >
             <li className='-mb-px mr-2 last:mr-0 flex-auto text-center'>
-              <a
+              <Link
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 0
@@ -59,10 +60,10 @@ const SolicitudesList = (props: SolicitudesServicioListProps) => {
               >
                 <i className='fas fa-space-shuttle text-base mr-1'></i>{' '}
                 Servicios Inmediatos
-              </a>
+              </Link>
             </li>
             <li className='-mb-px mr-2 last:mr-0 flex-auto text-center'>
-              <a
+              <Link
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 1
@@ -76,7 +77,7 @@ const SolicitudesList = (props: SolicitudesServicioListProps) => {
               >
                 <i className='fas fa-cog text-base mr-1'></i> Servicios
                 Reservados
-              </a>
+              </Link>
             </li>
           </ul>
           <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded'>

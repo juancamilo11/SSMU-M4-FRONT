@@ -48,7 +48,7 @@ const ViajarAhoraPage = () => {
   useEffect(() => {
     setLoading(true);
     new Promise((resolve) => {
-      setTimeout(() => resolve(''), 1000);
+      setTimeout(() => resolve(''), 100);
     }).then(() => {
       apiService
         .get<ListaSolicitudesPaquetesResponse>('/solicitudes-paquetes', {

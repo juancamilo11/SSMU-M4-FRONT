@@ -45,7 +45,7 @@ const ViajarAhoraPage = () => {
   useEffect(() => {
     setLoading(true);
     new Promise((resolve) => {
-      setTimeout(() => resolve(''), 1000);
+      setTimeout(() => resolve(''), 100);
     }).then(() => {
       const type = activeTab === 0 ? 'INMEDIATA' : 'RESERVADA';
       apiService
