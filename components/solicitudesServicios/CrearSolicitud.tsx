@@ -104,7 +104,8 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
       .post(solicitudServicioInfo, '/solicitudes-servicios', true)
       .then((response) => {
         Swal.fire({
-          title: `Solicitud guardada correctamente`,
+          title: `Solicitud Realizada.\n
+          ¡Esperando que un socio acepte tu viaje!`,
           focusConfirm: false,
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Aceptar',
