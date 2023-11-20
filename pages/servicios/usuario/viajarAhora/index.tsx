@@ -20,7 +20,6 @@ export interface ListaSolicitudesServicioResponse {
 }
 
 const ViajarAhoraPage = () => {
-  const [userId] = useState<string>('e9c596b2-780b-4aea-845f-855d2678a8cd');
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTab, setActiceTab] = useState<number>(0);
   let [apiService] = useState(new ApiService());
@@ -49,10 +48,14 @@ const ViajarAhoraPage = () => {
     }).then(() => {
       const type = activeTab === 0 ? 'INMEDIATA' : 'RESERVADA';
       apiService
-        .get<ListaSolicitudesServicioResponse>('/solicitudes-servicios', {
-          ...paginacion,
-          type,
-        })
+        .get<ListaSolicitudesServicioResponse>(
+          '/solicitudes-servicios',
+          {
+            ...paginacion,
+            type,
+          },
+          true
+        )
         .then((data) => {
           setSolicitudesServicio(data);
         })

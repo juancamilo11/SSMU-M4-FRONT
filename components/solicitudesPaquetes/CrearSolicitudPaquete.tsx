@@ -94,7 +94,7 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
     };
 
     return apiService
-      .post(solicitudPaqueteInfo, '/solicitudes-paquetes')
+      .post(solicitudPaqueteInfo, '/solicitudes-paquetes', true)
       .then((response) => {
         Swal.fire({
           title: `Solicitud de envio/recogida de paquete guardada correctamente`,

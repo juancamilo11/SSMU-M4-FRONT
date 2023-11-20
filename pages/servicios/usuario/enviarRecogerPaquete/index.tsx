@@ -51,9 +51,13 @@ const ViajarAhoraPage = () => {
       setTimeout(() => resolve(''), 100);
     }).then(() => {
       apiService
-        .get<ListaSolicitudesPaquetesResponse>('/solicitudes-paquetes', {
-          ...paginacion,
-        })
+        .get<ListaSolicitudesPaquetesResponse>(
+          '/solicitudes-paquetes',
+          {
+            ...paginacion,
+          },
+          true
+        )
         .then((data) => {
           setSolicitudesPaquetes(data);
         })

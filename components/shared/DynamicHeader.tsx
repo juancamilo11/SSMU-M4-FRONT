@@ -16,7 +16,7 @@ const DynamicHeader = (props: DynamicHeaderProps) => {
         </Link>
 
         <nav className='flex flex-wrap items-center text-base'>
-          <div className='flex'>
+          <Link className='flex' href='/servicios/usuario/auth/login'>
             <div className='relative mx-3 w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600'>
               <svg
                 className='absolute w-12 h-12 text-gray-400 -left-1'
@@ -31,13 +31,10 @@ const DynamicHeader = (props: DynamicHeaderProps) => {
                 ></path>
               </svg>
             </div>
-            <Link
-              href='#_'
-              className='mx-0 my-auto font-medium text-white text-xl hover:text-gray-900'
-            >
-              Usuario
-            </Link>
-          </div>
+            <p className='mx-0 my-auto font-medium text-white text-xl hover:text-gray-900'>
+              Ingreso / Registro
+            </p>
+          </Link>
         </nav>
       </div>
     </header>

@@ -23,10 +23,8 @@ const SolicitudesList = (props: SolicitudesServicioListProps) => {
     setActiceTab,
   } = props;
 
-  const [apiService] = useState<ApiService>(new ApiService());
-
   const [openTab, setOpenTab] = useState(activeTab);
-  const [color, setColor] = useState('blue');
+  const [color] = useState('blue');
 
   const cambiarTabActiva = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,

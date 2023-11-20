@@ -1,10 +1,20 @@
 export class ApiService {
-  public post<T>(data: T, url: string): Promise<T> {
-    const config = {
+  public post<T>(
+    data: T,
+    url: string,
+    authRequired: boolean = false
+  ): Promise<T> {
+    const config: RequestInit = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     };
+
+    if (authRequired) {
+      const token = `Bearer ${localStorage.getItem('id_token')}`;
+      config.headers = { ...config.headers, Authorization: token };
+    }
+
     return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
       ...config,
     })
@@ -12,14 +22,20 @@ export class ApiService {
       .then((data) => data as T);
   }
 
-  public get<T>(url: string, query?: { [key: string]: any }): Promise<T> {
+  public get<T>(
+    url: string,
+    query?: { [key: string]: any },
+    authRequired: boolean = false
+  ): Promise<T> {
     const config: RequestInit = {
       method: 'GET',
     };
     const params = new URLSearchParams(query).toString();
-    console.log({
-      params,
-    });
+    if (authRequired) {
+      const token = `Bearer ${localStorage.getItem('id_token')}`;
+      config.headers = { ...config.headers, Authorization: token };
+      console.log({ token: token, url: url });
+    }
     return fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}?${params}`,
       {
