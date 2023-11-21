@@ -34,7 +34,7 @@ export class ApiService {
     if (authRequired) {
       const token = `Bearer ${localStorage.getItem('access_token')}`;
       config.headers = { ...config.headers, Authorization: token };
-      console.log({ token: token, url: url });
+      ({ token: token, url: url });
     }
     return fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}?${params}`,
@@ -53,7 +53,6 @@ export class ApiService {
     if (authRequired) {
       const token = `Bearer ${localStorage.getItem('access_token')}`;
       config.headers = { ...config.headers, Authorization: token };
-      console.log({ token: token, url: url });
     }
     return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
       ...config,
@@ -73,7 +72,6 @@ export class ApiService {
       .then((response) => response.json())
       .then((data) => (rta = data))
       .catch((error) => {
-        console.log(error);
         rta = { message: 'Algo salió mal...' };
       });
 

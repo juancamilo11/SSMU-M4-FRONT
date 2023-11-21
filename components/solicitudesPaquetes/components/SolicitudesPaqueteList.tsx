@@ -45,7 +45,6 @@ const SolicitudesPaquetesList = (props: SolicitudesPaquetesListProps) => {
         }));
       })
       .catch((err) => {
-        console.log(err);
         return Swal.fire({
           icon: 'error',
           title: 'Oops...',

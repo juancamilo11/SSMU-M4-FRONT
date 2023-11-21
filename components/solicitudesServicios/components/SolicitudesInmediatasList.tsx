@@ -45,7 +45,6 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
         }));
       })
       .catch((err) => {
-        console.log(err);
         return Swal.fire({
           icon: 'error',
           title: 'Oops...',
