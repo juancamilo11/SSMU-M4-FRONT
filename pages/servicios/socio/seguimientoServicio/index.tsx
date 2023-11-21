@@ -1,7 +1,7 @@
 import Header from '@/components/shared/Header';
-import Map from '@/components/SolicitudesServicios/Map';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import CustomMap from '@/components/CustomMap';
 
 export default function seguimientoServicioSocio() {
   useEffect(() => {}, []);
@@ -80,7 +80,7 @@ export default function seguimientoServicioSocio() {
                   </button>
                 </div>
               </div>
-              <Map></Map>
+              <CustomMap />
 
               <button
                 onClick={cancelarServicio}
