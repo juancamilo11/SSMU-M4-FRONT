@@ -49,6 +49,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
     formState: { errors },
     handleSubmit,
     getValues,
+    reset,
   } = useForm();
 
   const apiService = new ApiService();
@@ -113,8 +114,13 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Aceptar',
         });
+        reset();
         setSolicitudesServicio((solicitudesActuales) => ({
           ...solicitudesActuales,
+          paginationInfo: {
+            ...solicitudesActuales.paginationInfo,
+            totalElements: solicitudesActuales.paginationInfo.totalElements + 1,
+          },
           elements: [...solicitudesActuales.elements, response],
         }));
       });
@@ -152,7 +158,6 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     required
                     {...register('start', {
                       required: true,
-                      value: 'La Ceja, Antioquia',
                     })}
                   />
                   {errors.start?.type === 'required' && (
@@ -220,7 +225,6 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     required
                     {...register('destiny', {
                       required: true,
-                      value: 'Medellín',
                     })}
                   />
                   {errors.destiny?.type === 'required' && (
@@ -260,7 +264,6 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     required
                     {...register('passengersNumber', {
                       required: true,
-                      value: 3,
                     })}
                   >
                     <option value='1'>1</option>
@@ -306,7 +309,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                       id='time'
                       className='w-full bg-transparent ring-2 ring-gray-300 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500'
                       required
-                      {...register('time', { required: true, value: '14:00' })}
+                      {...register('time', { required: true })}
                     />
                     {errors.time?.type === 'required' && (
                       <p className='text-red-500'>
@@ -341,7 +344,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     type='checkbox'
                     id='pet'
                     className='form-checkbox w-16'
-                    {...register('pet', { required: false, value: true })}
+                    {...register('pet', { required: false })}
                   />
                   <label className='ml-2'>Viajo con mi mascota</label>
                 </div>
@@ -350,7 +353,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     type='checkbox'
                     id='suitcase'
                     className='form-checkbox w-16'
-                    {...register('suitcase', { required: false, value: true })}
+                    {...register('suitcase', { required: false })}
                   />
                   <label className='ml-2'>Viajo con maletas</label>
                 </div>

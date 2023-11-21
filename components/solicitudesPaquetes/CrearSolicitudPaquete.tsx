@@ -17,7 +17,6 @@ export enum VehicleType {
 export interface SolicitudPaqueteInfo {
   id?: number;
   activa?: boolean;
-  usuarioId: string;
   origen: string;
   destino: string;
   fecha: string;
@@ -49,9 +48,9 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
     formState: { errors },
     handleSubmit,
     getValues,
+    reset,
   } = useForm();
 
-  let [userId] = useState<string>('e9c596b2-780b-4aea-845f-855d2678a8cd');
   let [apiService] = useState<ApiService>(new ApiService());
 
   const getCurrentDateTime = () => {
@@ -80,7 +79,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
     });
 
     const solicitudPaqueteInfo: SolicitudPaqueteInfo = {
-      usuarioId: userId,
       origen: data.start,
       destino: data.destiny,
       fecha: data.fecha,
@@ -102,8 +100,13 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Aceptar',
         });
+        reset();
         setSolicitudesPaquetes((solicitudesActuales) => ({
           ...solicitudesActuales,
+          paginationInfo: {
+            ...solicitudesActuales.paginationInfo,
+            totalElements: solicitudesActuales.paginationInfo.totalElements + 1,
+          },
           elements: [...solicitudesActuales.elements, response],
         }));
       });
@@ -137,7 +140,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     required
                     {...register('start', {
                       required: true,
-                      value: 'cc San Antonio',
                     })}
                   />
                   {errors.start?.type === 'required' && (
@@ -157,7 +159,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     required
                     {...register('destiny', {
                       required: true,
-                      value: 'La Ceja, Ant.',
                     })}
                   />
                   {errors.destiny?.type === 'required' && (
@@ -179,7 +180,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     required
                     {...register('largo', {
                       required: true,
-                      value: 50,
                       min: 0,
                     })}
                   />
@@ -203,7 +203,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     required
                     {...register('ancho', {
                       required: true,
-                      value: 60,
                       min: 0,
                     })}
                   />
@@ -226,7 +225,6 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     required
                     {...register('alto', {
                       required: true,
-                      value: 70,
                       min: 0,
                     })}
                   />
@@ -250,7 +248,7 @@ const CrearSolicitudPaquete = (props: CrearSolicitudPaqueteProps) => {
                     id='peso'
                     className='w-full bg-transparent ring-2 ring-gray-300 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500'
                     required
-                    {...register('peso', { required: true, value: 10 })}
+                    {...register('peso', { required: true })}
                   />
                   {errors.weight?.type === 'required' && (
                     <p className='text-red-500'>

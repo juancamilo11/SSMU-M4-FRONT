@@ -39,8 +39,16 @@ const SolicitudesInmediatasList = (props: SolicitudesInmediatasListProps) => {
           (solicitud) => solicitud.id !== id
         );
 
-        setSolicitudesInmediatas((solicitudes) => ({
-          ...solicitudes,
+        // setSolicitudesInmediatas((solicitudes) => ({
+        //   ...solicitudes,
+        //   elements: solicitudesFiltradas,
+        // }));
+        setSolicitudesInmediatas((solicitudesActuales) => ({
+          ...solicitudesActuales,
+          paginationInfo: {
+            ...solicitudesActuales.paginationInfo,
+            totalElements: solicitudesActuales.paginationInfo.totalElements - 1,
+          },
           elements: solicitudesFiltradas,
         }));
       })

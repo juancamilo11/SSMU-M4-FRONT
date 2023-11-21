@@ -39,8 +39,16 @@ const SolicitudesPaquetesList = (props: SolicitudesPaquetesListProps) => {
           (solicitud) => solicitud.id !== id
         );
 
-        setSolicitudesPaquetes((solicitudes) => ({
-          ...solicitudes,
+        // setSolicitudesPaquetes((solicitudes) => ({
+        //   ...solicitudes,
+        //   elements: solicitudesFiltradas,
+        // }));
+        setSolicitudesPaquetes((solicitudesActuales) => ({
+          ...solicitudesActuales,
+          paginationInfo: {
+            ...solicitudesActuales.paginationInfo,
+            totalElements: solicitudesActuales.paginationInfo.totalElements - 1,
+          },
           elements: solicitudesFiltradas,
         }));
       })
@@ -72,10 +80,6 @@ const SolicitudesPaquetesList = (props: SolicitudesPaquetesListProps) => {
                       <li>
                         <strong>Estado: </strong>{' '}
                         <span>{solicitud.activa ? 'ACTIVA' : 'INACTIVA'}</span>
-                      </li>
-                      <li>
-                        <strong>usuarioId: </strong>{' '}
-                        <span>{solicitud.usuarioId}</span>
                       </li>
                       <li>
                         <strong>origen: </strong>{' '}

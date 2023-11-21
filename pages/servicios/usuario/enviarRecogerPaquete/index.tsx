@@ -24,7 +24,6 @@ export interface ListaSolicitudesPaquetesResponse {
 }
 
 const ViajarAhoraPage = () => {
-  const [userId] = useState<string>('e9c596b2-780b-4aea-845f-855d2678a8cd');
   const [loading, setLoading] = useState<boolean>(true);
   let [apiService] = useState(new ApiService());
   const [paginacion, setPaginacion] = useState({

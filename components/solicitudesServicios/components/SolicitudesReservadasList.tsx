@@ -39,8 +39,16 @@ const SolicitudesReservadasList = (props: SolicitudesReservadasListProps) => {
           (solicitud) => solicitud.id !== id
         );
 
-        setSolicitudesReservadas((solicitudes) => ({
-          ...solicitudes,
+        // setSolicitudesReservadas((solicitudes) => ({
+        //   ...solicitudes,
+        //   elements: solicitudesFiltradas,
+        // }));
+        setSolicitudesReservadas((solicitudesActuales) => ({
+          ...solicitudesActuales,
+          paginationInfo: {
+            ...solicitudesActuales.paginationInfo,
+            totalElements: solicitudesActuales.paginationInfo.totalElements - 1,
+          },
           elements: solicitudesFiltradas,
         }));
       })
