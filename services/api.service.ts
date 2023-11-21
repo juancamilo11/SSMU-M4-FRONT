@@ -11,7 +11,7 @@ export class ApiService {
     };
 
     if (authRequired) {
-      const token = `Bearer ${localStorage.getItem('id_token')}`;
+      const token = `Bearer ${localStorage.getItem('access_token')}`;
       config.headers = { ...config.headers, Authorization: token };
     }
 
@@ -32,7 +32,7 @@ export class ApiService {
     };
     const params = new URLSearchParams(query).toString();
     if (authRequired) {
-      const token = `Bearer ${localStorage.getItem('id_token')}`;
+      const token = `Bearer ${localStorage.getItem('access_token')}`;
       config.headers = { ...config.headers, Authorization: token };
       console.log({ token: token, url: url });
     }
@@ -46,10 +46,15 @@ export class ApiService {
       .then((data) => data as T);
   }
 
-  public delete<T>(url: string): Promise<T> {
-    const config = {
+  public delete<T>(url: string, authRequired: boolean = false): Promise<T> {
+    const config: RequestInit = {
       method: 'DELETE',
     };
+    if (authRequired) {
+      const token = `Bearer ${localStorage.getItem('access_token')}`;
+      config.headers = { ...config.headers, Authorization: token };
+      console.log({ token: token, url: url });
+    }
     return fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL + url}`, {
       ...config,
     })

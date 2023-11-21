@@ -93,10 +93,13 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
         maletas: data.suitcase,
         mascotas: data.pet,
       },
-      fecha: new Date()
-        .toISOString()
-        .split('T')[0]
-        .concat(`T${data.time}:00.000Z`),
+      fecha:
+        activeTab === 0
+          ? new Date()
+              .toISOString()
+              .split('T')[0]
+              .concat(`T${data.time}:00.000Z`)
+          : data.datetime_local,
       paradas: data.paradas,
     };
 
@@ -318,10 +321,10 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     </label>
                     <input
                       type='datetime-local'
-                      id='datetime-local'
+                      id='datetime_local'
                       className='w-full bg-transparent ring-2 ring-gray-300 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500'
                       required
-                      {...register('datetime-local', {
+                      {...register('datetime_local', {
                         required: true,
                         value: getCurrentDateTime(),
                       })}

@@ -17,7 +17,7 @@ const SolicitudesReservadasList = (props: SolicitudesReservadasListProps) => {
 
   const eliminarSolicitud = (id: number) => {
     return apiService
-      .delete<any>(`/solicitudes-servicios/${id}`)
+      .delete<any>(`/solicitudes-servicios/${id}`, true)
       .then((response) => {
         const { deleted } = response;
         if (!deleted) {
@@ -77,10 +77,6 @@ const SolicitudesReservadasList = (props: SolicitudesReservadasListProps) => {
                           <span>
                             {solicitud.activa ? 'ACTIVA' : 'INACTIVA'}
                           </span>
-                        </li>
-                        <li>
-                          <strong>usuarioId: </strong>{' '}
-                          <span>{solicitud.usuarioId}</span>
                         </li>
                         <li>
                           <strong>origen: </strong>{' '}

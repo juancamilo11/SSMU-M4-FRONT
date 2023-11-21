@@ -15,7 +15,7 @@ interface UserRegisterInfo {
 
 const registerPage = () => {
   const router = useRouter();
-  const { formValues, handleInputChange, resetForm } =
+  const { formValues, handleInputChange, handleSelectChange, resetForm } =
     useForm<UserRegisterInfo>({
       email: 'juancamilo1999@gmail.com',
       password: 'Camilo.123HOLA',
@@ -24,7 +24,7 @@ const registerPage = () => {
       role: 'ROLE_USUARIO',
     });
 
-  const { email, fullName, password, phone } = formValues;
+  const { email, fullName, password, phone, role } = formValues;
 
   const [apiService] = React.useState<ApiService>(new ApiService());
 
@@ -35,6 +35,11 @@ const registerPage = () => {
     apiService
       .post<any>({ ...formValues }, '/auth/register')
       .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Registrado',
+          text: 'El usuario se registró correctamente',
+        });
         router.push('/servicios/usuario/auth/login');
       })
       .catch((err) => {
@@ -84,6 +89,24 @@ const registerPage = () => {
             </label>
           </div>
 
+          <div className='relative mb-6'>
+            {/* <label className='block mb-2 text-sm text-gray-600'>
+              Número de viajeros
+            </label> */}
+            <select
+              name='role'
+              value={role}
+              onChange={handleSelectChange}
+              id='role'
+              className='w-full bg-transparent ring-2 ring-gray-300 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-500'
+            >
+              <option value='ROLE_USUARIO'>Usuario</option>
+              <option value='ROLE_SOCIO'>Socio</option>
+            </select>
+            <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+              Teléfono
+            </label>
+          </div>
           <div className='relative h-11 w-full min-w-[200px] mb-4'>
             <input
               type='text'

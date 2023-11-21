@@ -17,7 +17,7 @@ const SolicitudesPaquetesList = (props: SolicitudesPaquetesListProps) => {
 
   const eliminarSolicitud = (id: number) => {
     return apiService
-      .delete<any>(`/solicitudes-paquetes/${id}`)
+      .delete<any>(`/solicitudes-paquetes/${id}`, true)
       .then((response) => {
         const { deleted } = response;
         if (!deleted) {

@@ -20,14 +20,6 @@ export interface ListaSolicitudesServicioResponse {
 }
 
 const ViajarAhoraPage = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [activeTab, setActiceTab] = useState<number>(0);
-  let [apiService] = useState(new ApiService());
-  const [paginacion, setPaginacion] = useState({
-    page: 0,
-    size: 10,
-  });
-
   const [solicitudesServicio, setSolicitudesServicio] =
     useState<ListaSolicitudesServicioResponse>({
       paginationInfo: {
@@ -38,8 +30,15 @@ const ViajarAhoraPage = () => {
       },
       elements: [],
     });
-
   const { paginationInfo } = solicitudesServicio;
+  const { totalElements } = paginationInfo;
+  const [loading, setLoading] = useState<boolean>(true);
+  const [activeTab, setActiceTab] = useState<number>(0);
+  let [apiService] = useState(new ApiService());
+  const [paginacion, setPaginacion] = useState({
+    page: 0,
+    size: 10,
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -120,7 +119,7 @@ const ViajarAhoraPage = () => {
               activeTab={activeTab}
               setActiceTab={setActiceTab}
             />
-            {paginationInfo.totalElements > 0 && (
+            {totalElements > 0 && (
               <SolicitudesPaginacion
                 paginationInfo={paginationInfo}
                 traerSiguientePagina={traerSiguientePagina}
