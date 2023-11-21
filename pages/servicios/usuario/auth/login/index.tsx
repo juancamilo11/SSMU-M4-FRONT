@@ -30,8 +30,8 @@ interface UserLoginInfo {
 const loginPage = () => {
   const router = useRouter();
   const { formValues, handleInputChange, resetForm } = useForm<UserLoginInfo>({
-    email: 'juancamilo19997820@gmail.com',
-    password: 'Camilo.123HOLA',
+    email: '',
+    password: '',
   });
 
   const { email, password } = formValues;
