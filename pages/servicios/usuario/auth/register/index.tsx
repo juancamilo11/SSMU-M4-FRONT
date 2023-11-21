@@ -17,10 +17,10 @@ const registerPage = () => {
   const router = useRouter();
   const { formValues, handleInputChange, handleSelectChange, resetForm } =
     useForm<UserRegisterInfo>({
-      email: 'juancamilo1999@gmail.com',
-      password: 'Camilo.123HOLA',
-      fullName: 'Juan Camilo Cardona',
-      phone: '30034523411',
+      email: '',
+      password: '',
+      fullName: '',
+      phone: '',
       role: 'ROLE_USUARIO',
     });
 
