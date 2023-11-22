@@ -161,7 +161,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     })}
                   />
                   {errors.start?.type === 'required' && (
-                    <p className='text-red-500'>
+                    <p id='err-start' className='text-red-500'>
                       Establece un punto de partida
                     </p>
                   )}
@@ -173,6 +173,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     <div className='relative'>
                       <input
                         type='checkbox'
+                        id='toggle-immediate'
                         checked={isChecked}
                         onChange={handleCheckboxChange}
                         className='sr-only'
@@ -228,7 +229,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                     })}
                   />
                   {errors.destiny?.type === 'required' && (
-                    <p className='text-red-500'>
+                    <p id='err-destiny' className='text-red-500'>
                       Establece un punto de llegada
                     </p>
                   )}
@@ -358,6 +359,7 @@ const CrearSolicitud = (props: CrearSolicitudServicioProps) => {
                   <label className='ml-2'>Viajo con maletas</label>
                 </div>
                 <button
+                  id='submit-btn'
                   onClick={handleSubmit(onSubmit)}
                   type='submit'
                   className='my-8 w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-2 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400'
